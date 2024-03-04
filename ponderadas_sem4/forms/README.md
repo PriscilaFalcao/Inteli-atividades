@@ -1,5 +1,6 @@
 # Atividade ponderada
 
+Realize o passo a passo do artigo e armazene o seu código em um repositório git. Crie um relatório em markdown com um resumo explicando a tecnologia, os conceitos aprendidos. Adicione prints com o código em execução.
 
 ## Introdução
 
