@@ -8,39 +8,27 @@ export class EmailService {
     private prisma: PrismaService,
     private mailerService: MailerService,
   ) {}
-
-  async getAllUsersCompanyIdentifier(): Promise<{
-    allCompanyIdentifier: string[];
-    emails: string[];
-  }> {
+  
+  async getAllUserEmails(): Promise<string[]> {
     try {
       const users = await this.prisma.csvTable.findMany();
-      const emails = users.map((user) => user.email);
-      const allCompanyIdentifier = users.map(
-        (user) => `${user.email}|${user.company}`,
-      );
-      return {
-        allCompanyIdentifier,
-        emails,
-      };
+      const emails = users.map(user => user.email);
+      return emails;
     } catch (error) {
-      throw new Error(
-        `Erro ao buscar os emails dos usuários: ${error.message}`,
-      );
+      throw new Error(`Erro ao buscar os emails dos usuários: ${error.message}`);
     }
   }
 
   async sendEmailsToUsers() {
     try {
-      const { allCompanyIdentifier, emails } =
-        await this.getAllUsersCompanyIdentifier();
+      const emails = await this.getAllUserEmails();
 
-      for (const [email, index] of emails) {
+      for (const email of emails) {
         await this.mailerService.sendMail({
-          from: 'sotrackboa.co@gmail.com',
+          from: "sotrackboa.co@gmail.com",
           to: email,
           subject: 'Pesquisa de satisfação - 99',
-          text: `Olá! Somos da 99 e gostaríamos de saber a sua opinião sobre o nosso serviço. Por favor, responda a pesquisa no link a seguir: https://modulo-9-jet.vercel.app/${allCompanyIdentifier[index]} . Agradecemos a sua colaboração! Atenciosamente, Equipe 99.`,
+          text: 'Olá! Somos da 99 e gostaríamos de saber a sua opinião sobre o nosso serviço. Por favor, responda a pesquisa no link a seguir: https://modulo-9-jet.vercel.app/ . Agradecemos a sua colaboração! Atenciosamente, Equipe 99.',
         });
       }
 

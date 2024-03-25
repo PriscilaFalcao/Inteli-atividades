@@ -16,10 +16,10 @@ datasource db {
 model CsvTable {
   id        Int      @id @default(autoincrement())
   name      String
-  email     String
+  email     String 
   phone     String
   company   String
-  cpf       String
+  cpf       String  
   empresa   String
   timestamp DateTime @default(now())
 }
@@ -28,15 +28,4 @@ model SatisfactionSurvey {
   id                  Int      @id @default(autoincrement())
   createdAt           DateTime @default(now())
   questionsAndAnswers Json
-  // Adicionando o campo userId para estabelecer a relação com User
-  userId              Int // Referência ao id do usuário que criou a pesquisa
-  user                User     @relation(fields: [userId], references: [id]) // Relação com a model User
-}
-
-model User {
-  id                Int                  @id @default(autoincrement())
-  email             String
-  companyIdentifier String               @unique
-  // Definindo a relação inversa com SatisfactionSurvey
-  surveys           SatisfactionSurvey[] // Um usuário pode ter várias pesquisas
 }

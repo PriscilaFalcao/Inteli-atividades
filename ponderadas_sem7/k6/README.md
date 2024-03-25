@@ -34,3 +34,37 @@ O tutorial traz diversos ensinamentos, tanto em relação a tecnologia, como tam
 
 Inicialmente foi copiado o backend da aplicação atual que temos no projeto para a pasta atual, a fim de executar o teste especificamente para a ponderada em questão.
 
+Nota-se que para a execução dos testes por meio da tecnologia, foi necessária a instalação
+
+Para o teste foi escolhido o endpoint de upload de arquivo csv, usando uma requisição POST.
+
+Seguiu-se conforme o tutorial de como seria o teste de carga de uma requisição POST, conforme imagem abaixo.
+
+<img src='./codigo_exemplo.png'><img>
+
+Para adaptar o código para o projeto, o código foi adaptado da seguinte forma:
+
+```
+import http from 'k6/http';
+import { sleep } from 'k6';
+
+const fileData = open('../src/link-lists/mocked-file/file_model.csv', 'b');
+
+export default function () {
+  const data = {
+    field: 'this is a standard form field',
+    file: http.file(fileData, 'file_model.csv'),
+  };
+  const res = http.post('http://localhost:3001/link-lists/upload', data);
+  sleep(3);
+}
+```
+
+Assim, com a execução dos testes, conseguiu-se os seguintes resultados:
+
+<img src='./resultado_teste.png'>
+
+Para a execução foi considerado o cenário de:
+
+- VUs: 5
+- Duração: 10 segundos 

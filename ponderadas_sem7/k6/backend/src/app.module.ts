@@ -8,26 +8,23 @@ import { EmailModule } from './email/email.module';
 import { APP_FILTER } from '@nestjs/core';
 import { HttpExceptionFilter } from './utils/exceptionFilter';
 import { SatisfactionSurveyModule } from './satisfaction-survey/satisfaction-survey.module';
-import { UserModule } from './user/user.module';
-import { UserService } from './user/user.service';
 
 @Module({
   imports: [
     MailerModule.forRoot({
       transport: {
         service: 'gmail',
-        host: 'smtp.gmail.com',
+        host: "smtp.gmail.com",
         port: 465,
         auth: {
           user: 'sotrackboa.co@gmail.com',
           pass: 'cjbw xfaz agru akla',
         },
-      },
+      }
     }),
     LinkListsModule,
     EmailModule,
-    SatisfactionSurveyModule,
-  ],
+    SatisfactionSurveyModule],
   controllers: [AppController],
   providers: [
     AppService,
@@ -35,7 +32,7 @@ import { UserService } from './user/user.service';
     {
       provide: APP_FILTER,
       useClass: HttpExceptionFilter,
-    },
-  ],
+    }],
 })
+
 export class AppModule {}

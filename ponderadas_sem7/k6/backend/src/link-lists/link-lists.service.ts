@@ -2,29 +2,20 @@ import { Injectable } from '@nestjs/common';
 import { readFileSync } from 'fs';
 import { parse } from 'papaparse';
 import { PrismaService } from '../prisma.service';
-import {
-  headersMatch,
-  atLeastOneRecord,
-  csvRecordValidName,
-  csvRecordValidEmail,
-  csvRecordValidPhone,
-  csvRecordValidCpf,
-} from './utils/csv.specification';
+import {headersMatch, atLeastOneRecord, csvRecordValidName, csvRecordValidEmail, csvRecordValidPhone, csvRecordValidCpf} from './utils/csv.specification';
 import { RabbitMQService } from '../rabbitmq/rabbitmq.service';
-import { UserService } from 'src/user/user.service';
 
 @Injectable()
 export class LinkListsService {
   constructor(
     private prisma: PrismaService,
-    private userService: UserService,
     private headersMatch: headersMatch,
     private atLeastOneRecord: atLeastOneRecord,
     private csvRecordValidName: csvRecordValidName,
     private csvRecordValidEmail: csvRecordValidEmail,
     private csvRecordValidPhone: csvRecordValidPhone,
     private csvRecordValidCpf: csvRecordValidCpf,
-    private readonly rabbitMQService: RabbitMQService,
+    private readonly rabbitMQService: RabbitMQService
   ) {}
 
   async getUploadedFile(filePath: string): Promise<string> {
@@ -42,12 +33,16 @@ export class LinkListsService {
     const parsedCsv = this.parseCSV(csvData);
     // this.validateCSV(parsedCsv);
 
-    await this.saveUsers(parsedCsv);
+    const existingUsers = await this.checkExistingUsers(parsedCsv);
+
+    if (existingUsers.length > 0) {
+      throw new Error('Usuários já existem para esta empresa.');
+    }
 
     const createdCsvEntities = await this.saveCSVData(parsedCsv);
 
     await this.sendLinkListToQueue(createdCsvEntities);
-
+    
     return createdCsvEntities;
   }
 
@@ -73,16 +68,8 @@ export class LinkListsService {
   public validateCSV(parsedCsv: any): void {
     if (!this.atLeastOneRecord.isSatisfiedBy(parsedCsv)) {
       throw new Error('O arquivo CSV está vazio.');
-    } else if (
-      !this.headersMatch.isSatisfiedBy(
-        parsedCsv.meta.fields.map((header) =>
-          header.toLowerCase().replace(/\s/g, ''),
-        ),
-      )
-    ) {
-      throw new Error(
-        'Os headers do CSV não correspondem aos esperados ou estão fora de ordem.',
-      );
+    } else if (!this.headersMatch.isSatisfiedBy(parsedCsv.meta.fields.map(header => header.toLowerCase().replace(/\s/g, '')))) {
+      throw new Error('Os headers do CSV não correspondem aos esperados ou estão fora de ordem.');
     } else if (!this.csvRecordValidEmail.isSatisfiedBy(parsedCsv.data)) {
       throw new Error('Os registros de e-mail do CSV não são válidos.');
     } else if (!this.csvRecordValidPhone.isSatisfiedBy(parsedCsv.data)) {
@@ -94,17 +81,15 @@ export class LinkListsService {
     }
   }
 
-  public async saveUsers(parsedCsv: any): Promise<any[]> {
-    const users = parsedCsv.data.map(async (item) => {
-      const email = item.email;
-      const company = item.company;
-
-      const user = await this.userService.create(email, company);
-
-      return user;
+  public async checkExistingUsers(parsedCsv: any): Promise<any[]> {
+    const companies = parsedCsv.data.map((item) => item.company);
+    const existingUsers = await this.prisma.csvTable.findMany({
+      where: {
+        company: { in: companies },
+      },
+      select: { company: true, email: true },
     });
-
-    return users;
+    return existingUsers;
   }
 
   public async saveCSVData(parsedCsv: any): Promise<any[]> {
@@ -137,11 +122,8 @@ export class LinkListsService {
 
   public async sendLinkListToQueue(data: any[]): Promise<void> {
     try {
-      await this.rabbitMQService.sendMessage(
-        'link-list-queue',
-        JSON.stringify(data),
-      );
-      console.log('Mensagem enviada para a fila link-list-queue', data);
+      await this.rabbitMQService.sendMessage('link-list-queue', JSON.stringify(data));
+      console.log("Mensagem enviada para a fila link-list-queue", data);
     } catch (error) {
       throw new Error('Erro ao enviar mensagem para a fila link-list-queue.');
     }
