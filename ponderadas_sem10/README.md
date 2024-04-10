@@ -31,6 +31,54 @@ O tutorial aborda os seguintes conceitos:
 
 7. **Execução dos workflows**: O tutorial orienta como executar os workflows criados, incluindo a execução de um pull request para testar o fluxo de trabalho e a execução de um push para a branch principal para aplicar as configurações do Terraform.
 
+
+# Execução
+
+Note que o projeto está no repositório: <https://github.com/PriscilaFalcao/learn-terraform-github-actions/tree/main>.
+
+Aqui está o passo a passo do tutorial "Automate Terraform with GitHub Actions" que eu segui:
+
+1. **Pré-requisitos**: Eu verifiquei se tinha uma conta no GitHub, uma conta no Terraform Cloud e uma conta na AWS.
+
+2. **Configuração do Terraform Cloud**:
+   - Criei um novo espaço de trabalho no Terraform Cloud chamado "learn-terraform-github-actions" usando a opção "API-driven workflow".
+   - Obteve as credenciais da AWS que eu queria usar no espaço de trabalho.
+   - Defini as seguintes variáveis de ambiente no espaço de trabalho do Terraform Cloud:
+     - `AWS_ACCESS_KEY_ID`: ID da chave de acesso da AWS.
+     - `AWS_SECRET_ACCESS_KEY`: Chave de acesso secreta da AWS.
+
+     <img src='./definicao_chaves.png'></img>
+   - Gerei um token de API do Terraform Cloud e o salvei em um local seguro.
+   <img src='./gerando_token.png'></img>
+
+
+
+3. **Configuração do Repositório do GitHub**:
+   - Acessei o repositório de modelo "Learn Terraform GitHub Actions" e criei um novo repositório usando-o como template.
+   - No novo repositório, fui para as configurações e acessei a página de "Secrets and variables".
+   - Criei um novo segredo chamado `TF_API_TOKEN` e o defini com o token de API do Terraform Cloud que eu gerei anteriormente.
+   - Clonei o repositório para o meu ambiente local.
+
+   <img src='./config_token_github.png'>
+
+4. **Revisão dos Fluxos de Trabalho do Terraform**:
+   - No diretório `.github/workflows` do repositório clonado, abri o arquivo `terraform-plan.yml`.
+   - Analisei o conteúdo do arquivo para entender como o fluxo de trabalho de planejamento do Terraform é definido.
+   - Em seguida, abri o arquivo `terraform-apply.yml` e revisei seu conteúdo para entender o fluxo de trabalho de aplicação do Terraform.
+
+<img src='./fazendo_pull_request.png'>
+
+5. **Execução dos Fluxos de Trabalho**:
+   - No meu ambiente local, fiz as alterações necessárias nos arquivos `.tf` para definir a infraestrutura que eu queria implantar.
+   - Realizei um commit e push das alterações para o repositório no GitHub.
+   - Criei um pull request para a branch principal e revisei o plano de implantação gerado pelo Terraform Cloud.
+   - Após a revisão, fiz o merge do pull request para a branch principal para aplicar as configurações do Terraform.
+
+6. **Observação dos Resultados**:
+   - Acompanhei a execução do fluxo de trabalho no GitHub Actions, verificando se todas as etapas foram executadas com sucesso.
+   - Acessei o Terraform Cloud e verifiquei se a infraestrutura foi implantada corretamente no espaço de trabalho.
+
+
 ## Conclusão
 
 O tutorial "Automate Terraform with GitHub Actions" mostra como integrar o Terraform ao GitHub Actions para automatizar o processo de infraestrutura como código. Através dessa integração, é possível criar fluxos de trabalho personalizados que seguem as melhores práticas de configuração, promovem a colaboração entre os membros da equipe e automatizam o fluxo de trabalho do Terraform. A combinação do Terraform e do GitHub Actions oferece uma solução poderosa para automatizar a implantação e o gerenciamento de infraestrutura em projetos de desenvolvimento de software.
