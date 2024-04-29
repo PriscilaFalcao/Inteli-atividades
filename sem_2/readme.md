@@ -26,23 +26,47 @@ No geral, o backstage.io é uma ferramenta poderosa para melhorar a colaboraçã
 Para realizar a atividade foram seguidos os seguintes passos. 
 
 ## Instalar o backstage:
-- Rodar o comando npx @backstage/create-app@latest --skip-install
+- Rodar o comando ```npx @backstage/create-app@latest --skip-install```.
 
-- Definir um nome para a aplicação
+<img src='./p1.png'></img>
 
-- Após criar a aplicação, navegue até a pasta da aplicação e rode o comando yarn install
-Caso o seu yarn esteja desatualizado, rodar o comando npm install --global yarn
-Preparar o build do backstage:
-Rode o comando yarn install --frozen-lockfile
-Preparar os types com o comando yarn tsc
-Rodar o comando yarn build:backend
-Ajustar o Dockerfile do backstage:
-Abra o projeto no vscode
-Acesse o Dockerfile do backend  em packages > backend > Dockerfile
-Substitua tudo pelo código abaixo (retirado do guia de build com docker e ajustado)
+- Definir um nome para a aplicação.
+
+- Após criar a aplicação, navegue até a pasta da aplicação e rode o comando ```yarn install```.
+
+
+<img src='./p2.png'></img>
+
+- Caso o seu yarn esteja desatualizado, rodar o comando ```npm install --global yarn```
+
+
+<img src='./p3.png'></img>
+
+
+## Preparar o build do backstage:
+
+- Rode o comando ```yarn install --frozen-lockfile```
+
+
+<img src='./p4.png'></img>
+
+- Preparar os types com o comando ```yarn tsc```
+
+- Rodar o comando ```yarn build:backend```
+
+
+<img src='./p5.png'></img>
+
+- Ajustar o Dockerfile do backstage:
+    - Abra o projeto no vscode
+    - Acesse o Dockerfile do backend em ```packages > backend > Dockerfile```
+- Substitua tudo pelo código abaixo (retirado do guia de build com docker e ajustado)
+
+
+
+```
 FROM node:18-bookworm-slim
-
-```# Install isolate-vm dependencies, these are needed by the @backstage/plugin-scaffolder-backend.
+# Install isolate-vm dependencies, these are needed by the @backstage/plugin-scaffolder-backend.
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
     apt-get update && \
@@ -82,4 +106,11 @@ RUN --mount=type=cache,target=/home/node/.cache/yarn,sharing=locked,uid=1000,gid
 COPY --chown=node:node packages/backend/dist/bundle.tar.gz app-config*.yaml ./
 RUN tar xzf bundle.tar.gz && rm bundle.tar.gz
 
-CMD ["node", "packages/backend", "--config", "app-config.yaml"]```
+CMD ["node", "packages/backend", "--config", "app-config.yaml"]
+```
+
+## Rodar no docker:
+
+- Rodar o comando ```docker image build . -f packages/backend/Dockerfile --tag backstage --no-cache```  (comando --no-cache para não reutilizar imagens anteriores)
+- Executar o container com o comando ```docker run -it -p 7007:7007 backstage```
+Após concluir, abrir http://localhost:7007
