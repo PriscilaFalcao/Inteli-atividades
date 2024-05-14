@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "7binG51ARBrqPYon6F5JnDd0Ym/+ykVlAVXdgwWRF731TRNVKc2MpUSBD0zR9sl+JkTiLzwmvtlfu+6nkwgCxQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\prisc\\OneDrive\\Documentos\\GitHub\\Inteli-atividades\\sem_4\\sem_4.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\prisc\\.nuget\\packages\\system.diagnostics.diagnosticsource\\8.0.1\\system.diagnostics.diagnosticsource.8.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

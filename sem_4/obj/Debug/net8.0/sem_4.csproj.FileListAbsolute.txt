@@ -1,0 +1,15 @@
+C:\Users\prisc\OneDrive\Documentos\GitHub\Inteli-atividades\sem_4\bin\Debug\net8.0\sem_4.exe
+C:\Users\prisc\OneDrive\Documentos\GitHub\Inteli-atividades\sem_4\bin\Debug\net8.0\sem_4.deps.json
+C:\Users\prisc\OneDrive\Documentos\GitHub\Inteli-atividades\sem_4\bin\Debug\net8.0\sem_4.runtimeconfig.json
+C:\Users\prisc\OneDrive\Documentos\GitHub\Inteli-atividades\sem_4\bin\Debug\net8.0\sem_4.dll
+C:\Users\prisc\OneDrive\Documentos\GitHub\Inteli-atividades\sem_4\bin\Debug\net8.0\sem_4.pdb
+C:\Users\prisc\OneDrive\Documentos\GitHub\Inteli-atividades\sem_4\obj\Debug\net8.0\sem_4.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\prisc\OneDrive\Documentos\GitHub\Inteli-atividades\sem_4\obj\Debug\net8.0\sem_4.AssemblyInfoInputs.cache
+C:\Users\prisc\OneDrive\Documentos\GitHub\Inteli-atividades\sem_4\obj\Debug\net8.0\sem_4.AssemblyInfo.cs
+C:\Users\prisc\OneDrive\Documentos\GitHub\Inteli-atividades\sem_4\obj\Debug\net8.0\sem_4.csproj.CoreCompileInputs.cache
+C:\Users\prisc\OneDrive\Documentos\GitHub\Inteli-atividades\sem_4\obj\Debug\net8.0\sem_4.sourcelink.json
+C:\Users\prisc\OneDrive\Documentos\GitHub\Inteli-atividades\sem_4\obj\Debug\net8.0\sem_4.dll
+C:\Users\prisc\OneDrive\Documentos\GitHub\Inteli-atividades\sem_4\obj\Debug\net8.0\refint\sem_4.dll
+C:\Users\prisc\OneDrive\Documentos\GitHub\Inteli-atividades\sem_4\obj\Debug\net8.0\sem_4.pdb
+C:\Users\prisc\OneDrive\Documentos\GitHub\Inteli-atividades\sem_4\obj\Debug\net8.0\sem_4.genruntimeconfig.cache
+C:\Users\prisc\OneDrive\Documentos\GitHub\Inteli-atividades\sem_4\obj\Debug\net8.0\ref\sem_4.dll
