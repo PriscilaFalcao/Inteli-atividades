@@ -1,0 +1,15 @@
+﻿public class HatCoMetrics
+{
+    private readonly Counter<int> x_hatsSold;
+
+    public HatCoMetrics(IMeterFactory meterFactory)
+    {
+        var meter = meterFactory.Create("HatCo.Store");
+        _hatsSold = meter.CreateCounter<int>("hatco.store.hats_sold");
+    }
+
+    public void HatsSold(int quantity)
+    {
+        _hatsSold.Add(quantity);
+    }
+}

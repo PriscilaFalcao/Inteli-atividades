@@ -133,3 +133,44 @@ Esse é um resumo do tutorial. Para obter todos os detalhes e exemplos de códig
 
 
 # Relatório - Obtenha um Medidor por meio da injeção de dependência
+
+Aqui estão os principais passos para obter um Medidor através da injeção de dependência:
+
+1. **Registre o Medidor no Contêiner de DI**: Ao usar injeção de dependência, você desejará registrar o Medidor como um serviço no contêiner de DI, para que possa ser injetado nas classes que precisam dele.
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddSingleton<Meter>(sp => new Meter("MinhaAplicacao"));
+}
+```
+
+2. **Injete o Medidor em Classes que Precisam Dele**: Nas classes que requerem acesso ao Medidor, você pode injetá-lo no construtor:
+
+```csharp
+public class MinhaClasse
+{
+    private readonly Meter _medidor;
+
+    public MinhaClasse(Meter medidor)
+    {
+        _medidor = medidor;
+    }
+
+    public void FacerAlgo()
+    {
+        var contador = _medidor.CreateCounter<int>("meu.contador");
+        contador.Add(1);
+    }
+}
+```
+
+3. **Use o Medidor Injetado**: Com o Medidor injetado, você agora pode usá-lo para criar instrumentos e registrar medições, como mostrado no exemplo acima.
+
+Os principais benefícios de usar a injeção de dependência para obter o Medidor são:
+
+- **Testabilidade**: É mais fácil testar classes que dependem do Medidor, já que você pode fornecer uma implementação falsa ou simulada durante os testes.
+- **Flexibilidade**: Você pode facilmente substituir a implementação do Medidor, se necessário, sem ter que alterar as classes que o consomem.
+- **Evita Singletons**: O uso de acesso estático/global ao Medidor é considerado um anti-padrão, pois pode tornar o código mais difícil de testar e manter. A injeção de dependência fornece uma solução mais idiomática.
+
+No geral, obter o Medidor através da injeção de dependência é uma boa prática que se alinha com os princípios de código fracamente acoplado, testável e mantível.
