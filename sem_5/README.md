@@ -83,6 +83,15 @@ O código funciona da seguinte forma:
     - Reinicia o serviço Apache.
 
 
-## TEMA 4 - Discuta como a integração de GitHub Actions com AWS CloudFormation e Amazon EC2 pode ser aplicada em projetos reais.
+## TEMA 4 - Discuta como a integração de GitHub Actions com AWS CloudFormation e Amazon EC2 pode ser aplicada em projetos reais.  Quais desafios você encontrou no seu projeto e como os solucionou?
 
 Em projetos reais, essa integração pode ser aplicada de várias maneiras. Por exemplo, ao trabalhar em um aplicativo web, os desenvolvedores podem configurar um pipeline CI/CD usando GitHub Actions que dispara um workflow sempre que o código é alterado. Esse workflow pode incluir etapas para testar o código, construir o artefato da aplicação e, em seguida, usar AWS CloudFormation para provisionar ou atualizar a infraestrutura necessária no AWS. Após a criação ou atualização dos recursos, GitHub Actions pode implementar a aplicação nas instâncias EC2 provisionadas, garantindo que a nova versão esteja disponível para os usuários com mínima intervenção manual. Isso não só melhora a velocidade e a frequência de deploys, mas também garante que a infraestrutura esteja sempre em um estado conhecido e consistente, reduzindo os riscos de falhas e melhorando a confiabilidade do sistema.
+
+Como não implementamos desafios com a ferramenta, contudo, alguns desafios que podem ser enfrentados com a implementação dela incluem:
+
+1. Complexidade de Scripts e Templates;
+2. Tempo de Provisionamento;
+3. Controle de Versão e Gerenciamento de Alterações;
+4. Limitações de Serviço e Recursos;
+5. Gerenciamento de Rollback;
+6. Segurança e Permissões.
