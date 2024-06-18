@@ -16,6 +16,29 @@ O Terraform mantém um estado da infraestrutura, permitindo que você visualize,
 
 ## AWS
 
+AWS é a plataforma de computação em nuvem mais abrangente e amplamente adotada do mundo, oferecendo mais de 200 serviços para uma ampla variedade de aplicativos. Lançada em 2006, a AWS se tornou a líder do mercado de nuvem pública, fornecendo uma infraestrutura escalável, confiável e segura para empresas de todos os tamanhos, desde startups até grandes corporações. A AWS permite que os clientes acessem uma gama de serviços, desde computação, armazenamento e banco de dados até inteligência artificial, machine learning e muito mais, tudo isso de forma ágil e com pagamento apenas pelos recursos utilizados.
 
+O EC2 (Elastic Compute Cloud) é um dos serviços mais importantes da AWS, pois fornece capacidade de computação escalável na nuvem. Com o EC2, os usuários podem provisionar e gerenciar facilmente instâncias de máquinas virtuais (VMs) com diferentes configurações de hardware, sistemas operacionais e software pré-instalado. Isso permite que as equipes de desenvolvimento e operações implantem rapidamente novos ambientes, escalem recursos conforme a demanda, e otimizem a utilização da infraestrutura.
 
 # Prática
+
+1) Primeiro foi necessária a instalação do Terraform CLI.
+<img src='./img1.png'>
+
+2) Em seguida, é feito a configuração do CLI da AWS.
+<img src='./img3.png'>
+
+3) Depois, configuramos as credenciais da AWS, a partir do arquivo txt.
+<img src='./img4.png'>
+
+4) Enfim, configuramos o arquivo tf para subir uma EC2 automaticamente configurado.
+<img src='./img5.png'>
+
+5) Logo depois, é possível observar o EC2 configurado na interface da AWS.
+<img src='./img6.png'>
+
+6) Para destruir a instância criada e manter limpo o ambiente de trabalho, ocorreu conforme a imagem abaixo.
+<img src='./img7.png'>
+
+7) Por fim, foi possível verificar na interface da AWS que a instância criada, não estava mais lá.
+<img src='./img8.png'>
