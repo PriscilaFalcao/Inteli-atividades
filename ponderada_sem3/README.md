@@ -16,10 +16,18 @@ Maiores instruções estão presentes no arquivo:
 
 ## Resolução
 
-> Inicialmente, vale destacar que parte da atividade foi feita em sala de aula juntamente com o professor, nesse sentido, entende-se que as práticas ensinadas atendem aos requisitos das orientações da ponderada. Ps: se nós não tivessemos feito em sala de aula parte da atividade, apenas com as instruções da Adalove nunca saberia o que era para ser de fato feito.
+> Inicialmente, vale destacar que parte da atividade foi feita em sala de aula juntamente com o professor, nesse sentido, entende-se que as práticas ensinadas atendem aos requisitos das orientações da ponderada. Ps: se nós não tivéssemos feito em sala de aula parte da atividade, apenas com as instruções da Adalove nunca saberia o que era para ser de fato feito.
+
+Para a resolução da tarefa, foi feita a estrutura de pasta, conforme instrução, dessa forma, para encontrar o código, basta se direcionar para ```./meu-pacote```.
 
 1) Escolha da API
 
+Para a execução da atividade, foi escolhida a api de fatos sobre cachorros, disponível em:  https://dukengn.github.io/Dog-facts-API/
+
 2) Desenvolvimento do pacote Python
 
+Pode ser encntrado dentro da pasta ```./meu-pacote/data_pipeline```.
+
 3) Armazenamento na nuvem
+
+Não houve armazenamento na nuvem, especificamente. Para o armazenamento dos dados, foi utilizado o Minio (datalake) e o Clickhouse (datawarehouse).
