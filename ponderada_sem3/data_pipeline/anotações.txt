@@ -1,0 +1,14 @@
+- Na hora de instalar o pytest, tem que ser a versão dev
+- Vantagem de object storage:
+    - Estrutura de armazenamento que permite diversos tipos de dados;
+    - Como fica tudo junto, fica mais barato
+- Como colocar a senha do clickhouse - 10 pontos na ponderada
+- os .py que tem o client e o processamento são so módulos de ETL que devem ser divididos pra cada um dos temas (produtos, vendedores e lojas)
+- Tirar string de conexão dos codigos e colocar nas variáveis de ambiente (.env)
+- DDL (criar infraestruturas) e DML (criar dados) - sublinguagens de SQL
+
+
+- Pegar dados de uma API pública
+- Raw em um storage - datalake
+- Ingestão em algum datawharehouse - clickhouse
+- testes das funções no pytest
